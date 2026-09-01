@@ -739,14 +739,82 @@ footer {
   left: 20px;
   width: 130px;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 6px 16px rgba(62, 32, 9, 0.35);
   cursor: pointer;
   z-index: 900;
-  transition: left 3.5s ease-in-out, top 3.5s ease-in-out;
+  transition: left 1.4s linear, top 1.4s linear;
+  filter: drop-shadow(0 6px 8px rgba(62, 32, 9, 0.35));
 }
 
-.capybara-roam.happy {
+.capybara-flip {
+  transition: transform 0.3s ease;
+}
+
+.capybara-roam.facing-left .capybara-flip {
+  transform: scaleX(-1);
+}
+
+.capybara-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cb-body,
+.cb-head,
+.cb-ear {
+  fill: #c9995b;
+}
+
+.cb-tail {
+  fill: #b8834f;
+}
+
+.cb-leg rect {
+  fill: #8a5a30;
+}
+
+.cb-eye,
+.cb-nose {
+  fill: #3e2009;
+}
+
+.cb-rig {
+  animation: cb-bob 0.25s ease-in-out infinite;
+}
+
+.cb-leg-back {
+  transform-origin: 71px 90px;
+  animation: cb-leg-swing-a 0.5s ease-in-out infinite;
+}
+
+.cb-leg-front {
+  transform-origin: 158px 90px;
+  animation: cb-leg-swing-b 0.5s ease-in-out infinite;
+}
+
+@keyframes cb-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes cb-leg-swing-a {
+  0%, 100% { transform: rotate(22deg); }
+  50% { transform: rotate(-22deg); }
+}
+
+@keyframes cb-leg-swing-b {
+  0%, 100% { transform: rotate(-22deg); }
+  50% { transform: rotate(22deg); }
+}
+
+.capybara-roam.happy .cb-rig,
+.capybara-roam.happy .cb-leg-back,
+.capybara-roam.happy .cb-leg-front {
+  animation-play-state: paused;
+}
+
+.capybara-roam.happy .capybara-svg {
   animation: capybara-happy 0.6s ease;
 }
 
