@@ -259,5 +259,57 @@
     <p>&copy; 2026 Sangwon Yoon. All Rights Reserved.</p>
   </footer>
 
+  <!-- Photo: Capybara (Hydrochoerus hydrochaeris) alpha male by Charles J. Sharp, CC BY-SA 4.0, via Wikimedia Commons -->
+  <img src="capybara-roam.jpg" alt="돌아다니는 카피바라" title="카피바라를 클릭해보세요"
+       class="capybara-roam" id="capybaraRoam" role="button" tabindex="0"
+       aria-label="돌아다니는 카피바라, 클릭하면 애교를 부립니다">
+  <script>
+    (function () {
+      var capy = document.getElementById('capybaraRoam');
+      if (!capy) return;
+
+      function moveRandom() {
+        var margin = 16;
+        var maxX = Math.max(window.innerWidth - capy.offsetWidth - margin, margin);
+        var maxY = Math.max(window.innerHeight - capy.offsetHeight - margin, margin);
+        capy.style.left = (margin + Math.random() * (maxX - margin)) + 'px';
+        capy.style.top = (margin + Math.random() * (maxY - margin)) + 'px';
+      }
+
+      function spawnHearts() {
+        var rect = capy.getBoundingClientRect();
+        var faces = ['💛', '✨', '💕'];
+        for (var i = 0; i < 3; i++) {
+          var heart = document.createElement('span');
+          heart.className = 'capybara-heart';
+          heart.textContent = faces[Math.floor(Math.random() * faces.length)];
+          heart.style.left = (rect.left + rect.width / 2 - 10) + 'px';
+          heart.style.top = rect.top + 'px';
+          heart.style.setProperty('--dx', (Math.random() * 50 - 25) + 'px');
+          document.body.appendChild(heart);
+          (function (el) { setTimeout(function () { el.remove(); }, 1100); })(heart);
+        }
+      }
+
+      function playHappy() {
+        capy.classList.remove('happy');
+        void capy.offsetWidth;
+        capy.classList.add('happy');
+        spawnHearts();
+      }
+
+      capy.addEventListener('click', playHappy);
+      capy.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          playHappy();
+        }
+      });
+
+      moveRandom();
+      setInterval(moveRandom, 4000);
+    })();
+  </script>
+
 </body>
 </html>
